@@ -1,0 +1,47 @@
+.DEMain {
+    height: 100vh;
+    width: 100vw;
+    background-color:rgb(77,88,110);
+    padding-top: 100px;
+}
+
+.DEHeading {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.DEInputHolder {
+    height: 50px;
+    width: 100vw;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding-top:20px;
+
+}
+
+.DEInputField {
+    height: 50px;
+    width: 70vw;
+    font-size: large;
+    padding-left: 10px;
+}
+
+.DESearchButton{
+    height: 50px;
+    width: 60px;
+    background-color: transparent;
+    border: none;
+    font-size: 32px;
+    margin-left: 10px;
+    color: rgb(241,102,94);
+}
+.DESearchButton:hover{
+    font-size:36px ;
+    background-color: rgba(241, 101, 94, 0.678);
+    border-radius: 10px;
+    color: white;
+}
