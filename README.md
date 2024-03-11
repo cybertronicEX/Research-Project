@@ -5,6 +5,7 @@ Team members - IT20611606 – Siyabudeen S.M IT206061368 – Gunarathne I.A.V.D 
 Installation - clone project > npm i
 
 ! caution: 
+
 -when adding CSS follow naming conventions.AVOID putting general CSS for inputs,buttons etc.(specially u Nikil!!!) 
 
 -create a branch from dev branch for your components and work on them.
