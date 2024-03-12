@@ -18,20 +18,21 @@ export const SidebarData = [
     }, {
         title: 'Data-Extraction',
         path: '/dataExtraction',
-        icon: <FaIcons.FaCartPlus />,
+        icon: <FaIcons.FaDatabase />,
         cName: 'nav-text'
     },
 // enter ur page routes here with titles and icons for it to display on nav bar
+// https://react-icons.github.io/react-icons/icons/fa/ in case need to change icons
     {
         title: 'Mahens',
         path: '/Mahen',
-        icon: <FaIcons.FaCartPlus />,
+        icon: <FaIcons.FaCube />,
         cName: 'nav-text'
     },
     {
         title: 'Nikils',
         path: '/Nikil',
-        icon: <FaIcons.FaCartPlus />,
+        icon: <FaIcons.FaRocketchat />,
         cName: 'nav-text'
     },
 
