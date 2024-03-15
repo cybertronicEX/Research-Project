@@ -1,0 +1,74 @@
+.ProfileMain {
+    background-color: rgb(77, 88, 110);
+    color: rgb(35, 35, 35);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.ProfileComponentContainer {
+    width: 50%;
+    margin-left: 25%;
+    background-color: rgb(35, 35, 35);
+    border-radius: 10px;
+    padding:20px
+}
+
+.ProfileH1 {
+    font-size: 36px;
+    color: whitesmoke;
+    text-align: center;
+}
+
+.ProfileImageContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.ProfileImageCard {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ProfileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ProfilePredictionCard {
+    background-color:rgb(241, 102, 94) ;
+    border-radius: 20px; 
+    margin: 30px;
+    padding: 10px;
+}
+
+.ProfilePrediction {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: space-between;
+   
+}
+
+.ProfileTypoPrediction {
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.ProfileTypoAnswer {
+    color:black;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}

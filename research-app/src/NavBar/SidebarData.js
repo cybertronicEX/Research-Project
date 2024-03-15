@@ -11,14 +11,27 @@ export const SidebarData = [
         cName: 'nav-text'
     },
     {
+        title: 'Profile',
+        path: '/profile',
+        icon: <FaIcons.FaUserCircle  />,
+        cName: 'nav-text'
+    },
+    {
         title: 'Fashion-Profiler',
         path: '/fashionProfiler',
         icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
-    }, {
-        title: 'Data-Extraction',
-        path: '/dataExtraction',
-        icon: <FaIcons.FaDatabase />,
+    },
+    //  {
+    //     title: 'Data-Extraction',
+    //     path: '/dataExtraction',
+    //     icon: <FaIcons.FaDatabase />,
+    //     cName: 'nav-text'
+    // },
+    {
+        title: 'Recommendation Engine',
+        path: '/recommender',
+        icon: <FaIcons.FaMicrochip  />,
         cName: 'nav-text'
     },
 // enter ur page routes here with titles and icons for it to display on nav bar
@@ -35,5 +48,10 @@ export const SidebarData = [
         icon: <FaIcons.FaRocketchat />,
         cName: 'nav-text'
     },
-
+    {
+        title: 'Logout',
+        path: '/logout',
+        icon: <AiIcons.AiOutlineLogout />,
+        cName: 'nav-text'
+    }
 ]

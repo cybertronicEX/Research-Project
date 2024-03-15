@@ -1,0 +1,43 @@
+.PFDialogMain {
+    background-color: rgb(77, 88, 110);
+    padding: 16px;
+}
+
+.PFDialogMain .MuiDialogTitle-root {
+    color: white
+}
+
+.PFDialogMain .MuiDialogContentText-root {
+    color: rgb(35, 35, 35);
+}
+
+.PFDialogMain .MuiButton-root {
+    color: white;
+    background-color: rgb(241, 102, 94);
+    margin-right: 8px;
+}
+
+.PFDialogMain .MuiButton-root:hover {
+    background-color: rgba(77, 88, 110, 0.8);
+}
+
+.FP_PDTypoPrediction {
+  
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.FP_PDTypoAnswer {
+
+    color:rgb(241, 102, 94);
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.FP_PDpredictionLine {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,32 @@
+.RecommendMain {
+    background-color: rgb(77, 88, 110);
+    color: rgb(35, 35, 35);
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+   
+}
+
+.RecommendComponentContainer {
+    width: 50%;
+    margin-left: 25%;
+    background-color: rgb(35, 35, 35);
+    border-radius: 10px;
+    padding:20px;
+    justify-content: center;
+}
+
+.RecommendH1 {
+    font-size: 36px;
+    color: whitesmoke;
+    text-align: center;
+}
+.RecommendButtonContaier{
+    background-color: rgb(241, 102, 94) ;
+    color: whitesmoke;
+}
+.RecommendButton1{
+    color: whitesmoke;
+    
+   
+}

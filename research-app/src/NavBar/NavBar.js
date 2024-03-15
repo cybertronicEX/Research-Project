@@ -1,14 +1,22 @@
 import React ,{ useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import {SidebarData} from './SidebarData'
 import "./NavBar.css"
 import  { IconContext } from 'react-icons';
 
-function Navbar() {
+function Navbar({handleLogout }) {
   const [sidebar, setSidebar] = useState(false);
+  const navigate = useNavigate();
   const showSidebar = () => setSidebar(!sidebar);
+
+  const handleClick = (path) => {
+    if (path === '/logout') {
+      handleLogout();
+      navigate('/login');
+    }
+  };
   return (
     <>
     <IconContext.Provider value={{color :'#fff'}}>
@@ -27,7 +35,7 @@ function Navbar() {
         </li>
         {SidebarData.map((item,index) => {
           return(
-            <li key={index} className={item.cName}>
+            <li key={index} className={item.cName} onClick={() => handleClick(item.path)}>
               <Link to ={item.path}>
                 {item.icon}
                 <span>
@@ -40,19 +48,6 @@ function Navbar() {
       </ul>
     </nav>
     </IconContext.Provider>
-    {/* <nav>
-      <ul>
-        <li>
-          <Link to ="/">Home</Link>
-        </li>
-        <li>
-          <Link to ="/order">Order</Link>
-        </li>
-        <li>
-          <Link to ="/nopage">NoPage</Link>
-        </li>
-      </ul>
-    </nav> */}
     </>
   )
 }
