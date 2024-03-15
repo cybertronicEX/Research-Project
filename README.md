@@ -11,7 +11,7 @@ IT20612450 – Jayawardana R.M.D
 IT20121488 – Dissanayake Y.D.N.N
 
 
-Installation - clone project > npm i 
+Installation - clone project > npm i > npm install react-icons
 
 ! caution: 
 
