@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './FashionProfiler.css'
+import React, { useState } from 'react';
+import './FashionProfiler.css';
 import PredictionDialog from './PredictionDialog';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
@@ -13,22 +13,21 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import './PredictionDialog.css';
 
-
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const FashionProfiler = () => {
-
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImages, setSelectedImages] = useState(['', '', '', '']);
   const [predictions, setPredictions] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-    fifth: '',
-    sixth: ''
+    first: { total: 0, count: 0 },
+    second: { total: 0, count: 0 },
+    third: { total: 0, count: 0 },
+    fourth: { total: 0, count: 0 },
+    fifth: { total: 0, count: 0 },
+    sixth: { total: 0, count: 0 }
   });
+
   const formatProbability = probability => {
     if (typeof probability !== 'number') {
         return 'N/A';
@@ -37,56 +36,79 @@ const FashionProfiler = () => {
     const roundedProbability = probability.toFixed(6);
     const probabilityPercentage = (probability * 100).toFixed(2) + '%';
     return `${roundedProbability} (${probabilityPercentage})`;
-};
+  };
 
-  const handleImageChange = event => {
+  const handleImageChange = (event, index) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-        setSelectedImage(reader.result);
+        const updatedImages = [...selectedImages];
+        updatedImages[index] = reader.result;
+        setSelectedImages(updatedImages);
     };
 
     reader.readAsDataURL(file);
     clearPredictions();
   };
+
   const clearPredictions = () => {
     setPredictions({
-        first: '',
-        second: '',
-        third: '',
-        fourth: '',
-        fifth: '',
-        sixth: ''
+        first: { total: 0, count: 0 },
+        second: { total: 0, count: 0 },
+        third: { total: 0, count: 0 },
+        fourth: { total: 0, count: 0 },
+        fifth: { total: 0, count: 0 },
+        sixth: { total: 0, count: 0 }
     });
-};
+  };
 
-const predictImage = () => {
-    const message = {
-        image: selectedImage.replace('data:image/png;base64,', '')
-    };
+  const predictImages = () => {
+    selectedImages.forEach((image, index) => {
+      const message = {
+        image: image.replace('data:image/png;base64,', '')
+      };
 
-    axios.post('http://127.0.0.1:5001/predict', JSON.stringify(message))
-        .then(response => {
-            setPredictions(response.data.prediction);
-        })
-        .catch(error => {
-            console.error('Error predicting image:', error);
-        });
+      axios.post('http://127.0.0.1:5001/predict', JSON.stringify(message))
+          .then(response => {
+              const updatedPredictions = { ...predictions };
+              Object.keys(updatedPredictions).forEach(category => {
+                updatedPredictions[category].total += response.data.prediction[category];
+                updatedPredictions[category].count++;
+              });
+              setPredictions(updatedPredictions);
+          })
+          .catch(error => {
+              console.error('Error predicting image:', error);
+          });
+    });
+  };
+
+  const calculateAverages = () => {
+    const averagedPredictions = {};
+    Object.keys(predictions).forEach(category => {
+      averagedPredictions[category] = predictions[category].total / predictions[category].count;
+    });
+    return averagedPredictions;
   };
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const Navigator = useNavigate();
 
-  async function handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
-    setIsDialogOpen(true)
-  }
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
-    Navigator('/profile')
+    setIsDialogOpen(true);
   };
+
+  const handleRetry = () => {
+    setIsDialogOpen(false);
+    clearPredictions();
+};
+
+const handleCloseDialog = () => {
+    setIsDialogOpen(false);
+    Navigator('/profile');
+};
 
   return (
     <div className='FPMain'>
@@ -96,66 +118,61 @@ const predictImage = () => {
       <div className='FPBody'>
         <h2 className='FpH2'>Set up your Fashion Profile</h2>
         <form className='FPImageUploaderForm' onSubmit={handleSubmit}>
-
-          <input id="image-selector" className='FPImageInput' type='file' onChange={handleImageChange} />
-          <button id="predict-button" className='FPFormSubmitButton' onClick={predictImage} type='submit'>Submit</button>
-          <img id="selected-image" src={selectedImage} alt="" />
-            
+          {[0, 1, 2, 3].map(index => (
+            <div key={index}>
+              <input className='FPImageInput' type='file' onChange={e => handleImageChange(e, index)} />
+              {/* <img className='FPSelectedImage' src={selectedImages[index]} alt="" /> */}
+            </div>
+          ))}
+          <button className='FPFormSubmitButton' onClick={predictImages} type='submit'>Submit</button>
         </form>
-            <p>Aristocratic: <span>{formatProbability(predictions.first)}</span></p>
-            <p>Classic: <span>{formatProbability(predictions.second)}</span></p>
-            <p>Creative: <span>{formatProbability(predictions.third)}</span></p>
-            <p>Dramatic: <span>{formatProbability(predictions.fourth)}</span></p>
-            <p>Neutral: <span>{formatProbability(predictions.fifth)}</span></p>
-            <p>Romantic: <span>{formatProbability(predictions.sixth)}</span></p>
       </div>
-      <Dialog
-        open={isDialogOpen}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleCloseDialog}
-        aria-describedby="alert-dialog-slide-description"
-      >
-      <div className='PFDialogMain'>
-            <DialogTitle>{"Here are our predictions on your fashion profile:"}</DialogTitle>
-            <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Aristocratic</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.first)}</Typography>
-                    </div>
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Classic</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.second)}</Typography>
-                    </div>
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Creative</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.third)}</Typography>
-                    </div>
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Dramatic</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.fourth)}</Typography>
-                    </div>
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Neutral</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.fifth)}</Typography>
-                    </div>
-                    <div className="FP_PDpredictionLine">
-                        <Typography className='FP_PDTypoPrediction'>Romantic</Typography>
-                        <Typography className='FP_PDTypoAnswer'>: {formatProbability(predictions.sixth)}</Typography>
-                    </div>
-                </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleCloseDialog}>Accept</Button>
-            </DialogActions>
-        </div>
-        
-      </Dialog>
 
+      <Dialog
+    open={isDialogOpen}
+    TransitionComponent={Transition}
+    keepMounted
+    onClose={handleCloseDialog}
+    aria-describedby="alert-dialog-slide-description"
+>
+    <div className='PFDialogMain'>
+        <DialogTitle>{"Here are our predictions on your fashion profile:"}</DialogTitle>
+        <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Aristocratic</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().first)}</Typography>
+                </div>
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Classic</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().second)}</Typography>
+                </div>
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Creative</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().third)}</Typography>
+                </div>
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Dramatic</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().fourth)}</Typography>
+                </div>
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Neutral</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().fifth)}</Typography>
+                </div>
+                <div className="FP_PDpredictionLine">
+                    <Typography className='FP_PDTypoPrediction'>Romantic</Typography>
+                    <Typography className='FP_PDTypoAnswer'>: {formatProbability(calculateAverages().sixth)}</Typography>
+                </div>
+            </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleRetry}>Retry</Button>
+          <Button onClick={handleCloseDialog}>Accept</Button>
+        </DialogActions>
     </div>
-    
+</Dialog>
+    </div>
   )
 }
 
-export default FashionProfiler
+export default FashionProfiler;
