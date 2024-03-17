@@ -13,18 +13,27 @@ const Recommender = () => {
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
     const [values, setValues] = useState({
-        value1: 0.5,
-        value2: 0.5,
-        value3: 0.5,
-        value4: 0.5,
-        value5: 0.5,
-        value6: 0.5
+        value1: 0.166666,
+        value2: 0.166666,
+        value3: 0.166666,
+        value4: 0.166666,
+        value5: 0.166666,
+        value6: 0.166666
     });
 
     const generateText = () => {
         setLoading(true); 
         const { value1, value2, value3, value4, value5, value6 } = values;
-        const prompt = `What kind of clothing would you recommend someone who is ${value1} Aristocratic, ${value2} Classic, ${value3} Creative, ${value4} Dramatic, ${value5} Neutral, ${value6} Romantic?`;
+        const percentValues = {
+            value1: (value1 * 100).toFixed(2),
+            value2: (value2 * 100).toFixed(2),
+            value3: (value3 * 100).toFixed(2),
+            value4: (value4 * 100).toFixed(2),
+            value5: (value5 * 100).toFixed(2),
+            value6: (value6 * 100).toFixed(2)
+        };
+        console.log(percentValues,'%');
+        const prompt = `What kind of clothing would you recommend someone who is ${percentValues.value1}% Aristocratic, ${percentValues.value2}% Classic, ${percentValues.value3}% Creative, ${percentValues.value4}% Dramatic, ${percentValues.value5}% Neutral, ${percentValues.value6}% Romantic?`;
 
         fetch('http://192.168.8.158:5000//generate', {
             method: 'POST',
@@ -47,9 +56,18 @@ const Recommender = () => {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setValues({ ...values, [name]: value });
+        const parsedValue = parseFloat(value);
+        const total = parsedValue + Object.values(values).reduce((acc, currentValue) => acc + parseFloat(currentValue), 0) - values[name];
+    
+        if (total <= 1) {
+            setValues({ ...values, [name]: parsedValue });
+        } else {
+            // If the total exceeds 1, set the current input's value to the maximum allowed value to keep the total within the limit
+            const maxValue = Math.max(0, 1 - (total - parsedValue));
+            setValues({ ...values, [name]: maxValue.toFixed(6) });
+        }
     };
-
+    
     // dialog box
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 

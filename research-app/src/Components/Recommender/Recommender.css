@@ -8,12 +8,12 @@
 }
 
 .RecommendComponentContainer {
-    width: 50%;
-    margin-left: 25%;
     background-color: rgb(35, 35, 35);
     border-radius: 10px;
     padding: 20px;
     justify-content: center;
+    margin: 10%;
+    margin-top: 5%;
 }
 
 
@@ -43,7 +43,8 @@
 
 
 .RecommendInputContainer {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
     margin-bottom: 10px;
 }
