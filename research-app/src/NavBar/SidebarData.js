@@ -37,13 +37,13 @@ export const SidebarData = [
     {
         title: 'Fashion Vision',
         path: '/fashionVision',
-        icon: <FaIcons.FaMicrochip  />,
+        icon: <FaIcons.FaCameraRetro  />,
         cName: 'nav-text'
     },
     {
         title: 'Item Scan',
         path: '/itemscan',
-        icon: <FaIcons.FaMicrochip  />,
+        icon: <FaIcons.FaCashRegister   />,
         cName: 'nav-text'
     },
 // enter ur page routes here with titles and icons for it to display on nav bar
