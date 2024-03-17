@@ -3,6 +3,11 @@ import './App.css';
 import { Route, Routes, Navigate } from "react-router-dom";
 import Home from './Components/Home';
 import FashionProfiler from './Components/FashionProfiler/FashionProfiler';
+import FashionVision from './Components/FashionVision/FashionVision';
+import ClothingDetection from './Components/ClothingDetection/ClothingDetection';
+
+
+
 // import DataExtraction from './Components/DataExtraction/DataExtraction';
 import Navbar from './NavBar/NavBar';
 import Login from './Components/Login/Login';
@@ -31,6 +36,10 @@ function App() {
             <Routes>
               <Route path="/" element={<><Navbar handleLogout={handleLogout} /><div className="container"><Home /></div></>} />
               <Route path="/fashionProfiler" element={<><Navbar handleLogout={handleLogout} /><div className="container"><FashionProfiler /></div></>} />
+              <Route path="/fashionVision" element={<><Navbar handleLogout={handleLogout} /><div className="container"><FashionVision /></div></>} />
+              <Route path="/itemscan" element={<><Navbar handleLogout={handleLogout} /><div className="container"><ClothingDetection /></div></>} />
+
+
               {/* <Route path="/dataExtraction" element={<><Navbar handleLogout={handleLogout} /><div className="container"><DataExtraction /></div></>} /> */}
               <Route path="/profile" element={<><Navbar handleLogout={handleLogout} /><div className="container"><Profile /></div></>} />
               <Route path="/recommender" element={<><Navbar handleLogout={handleLogout} /><div className="container"><Recommender /></div></>} />
