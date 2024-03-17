@@ -1,10 +1,10 @@
 .RecommendMain {
     background-color: rgb(77, 88, 110);
-    color: rgb(35, 35, 35);
+    /* color: rgb(35, 35, 35); */
     padding: 20px;
     font-family: Arial, sans-serif;
     height: 100vh;
-   
+
 }
 
 .RecommendComponentContainer {
@@ -12,19 +12,55 @@
     margin-left: 25%;
     background-color: rgb(35, 35, 35);
     border-radius: 10px;
-    padding:20px;
+    padding: 20px;
     justify-content: center;
 }
+
 
 .RecommendH1 {
     font-size: 36px;
     color: whitesmoke;
     text-align: center;
 }
-.RecommendButtonContaier{
-    background-color: rgb(241, 102, 94) ;
+
+.RecommendButtonContainer {
+    height: 40px;
     color: whitesmoke;
 }
-.RecommendButton1{
-    color: whitesmoke;     
+
+.RecommendButton1 {
+    color: whitesmoke;
+    width: 100%;
+    background-color: rgb(241, 102, 94);
+    height: 100%;
+
+}
+
+.RecommendButton1:hover {
+    color: rgb(241, 102, 94);
+    background-color: whitesmoke;
+}
+
+
+.RecommendInputContainer {
+    display: grid;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.RecommendInputSubContainer {
+    width: 100%;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.RecommendInputLabel {
+    color: whitesmoke;
+    width: 600px;
+}
+
+.RecommendInput {
+    width: 150px;
 }
