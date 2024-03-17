@@ -34,6 +34,18 @@ export const SidebarData = [
         icon: <FaIcons.FaMicrochip  />,
         cName: 'nav-text'
     },
+    {
+        title: 'Fashion Vision',
+        path: '/fashionVision',
+        icon: <FaIcons.FaMicrochip  />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Item Scan',
+        path: '/itemscan',
+        icon: <FaIcons.FaMicrochip  />,
+        cName: 'nav-text'
+    },
 // enter ur page routes here with titles and icons for it to display on nav bar
 // https://react-icons.github.io/react-icons/icons/fa/ in case need to change icons
     {
