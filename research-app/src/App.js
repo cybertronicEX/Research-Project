@@ -13,6 +13,7 @@ import Navbar from './NavBar/NavBar';
 import Login from './Components/Login/Login';
 import Profile from './Components/Profile/Profile';
 import Recommender from './Components/Recommender/Recommender';
+import Signup from './Components/Signup/Signup'
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ function App() {
   return (
     <Routes>
       <Route path="login" element={<Login handleLogin={handleLogin} />} />
+      <Route path="signup" element={<Signup />} /> {"signup"}
       <Route
         path="/*"
         element={
