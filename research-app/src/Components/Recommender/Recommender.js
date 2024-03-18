@@ -35,7 +35,7 @@ const Recommender = () => {
         console.log(percentValues,'%');
         const prompt = `What kind of clothing would you recommend someone who is ${percentValues.value1}% Aristocratic, ${percentValues.value2}% Classic, ${percentValues.value3}% Creative, ${percentValues.value4}% Dramatic, ${percentValues.value5}% Neutral, ${percentValues.value6}% Romantic?`;
 
-        fetch('http://192.168.8.158:5000//generate', {
+        fetch('http://172.28.6.36:5000/generate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
