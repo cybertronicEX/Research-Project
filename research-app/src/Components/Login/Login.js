@@ -25,7 +25,7 @@ export default function Login({ handleLogin }) {
                     value={username}
                     placeholder="Username"
                 />
-                <br />
+                {/* <br /> */}
                 <input
                     className='loginInput'
                     type='password'
@@ -36,7 +36,7 @@ export default function Login({ handleLogin }) {
                 />
                 <button className='LoginButton' type='submit'>Submit</button>
             </form>
-            <span className='SignupText'>Not a user? <button className='SignupButton' onClick={() => navigate('/signup')}>Sign up</button></span>
+            <span className='LoginSignupText'>Not a user? <button className='LoginSignupButton' onClick={() => navigate('/signup')}>Sign up</button></span>
         </div>
     );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-
+import './Signup.css'
 export default function Signup({ handleSignup }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -35,19 +35,19 @@ export default function Signup({ handleSignup }) {
 
     return (
         <div className='SignupMain'>
-            <h1 className='SignupH1'>Sign Up</h1>
             <form className='SignupForm' onSubmit={UserSignup}>
+                <h1 className='SignupH1'>Sign Up</h1>
                 <input
-                    className='signupInput'
+                    className='SignupInput'
                     type='text'
                     required={true}
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder='name'
+                    placeholder='Name'
                 />
                 <br />
                 <input
-                    className='signupInput'
+                    className='SignupInput'
                     type='email'
                     required={true}
                     value={email}
@@ -56,7 +56,7 @@ export default function Signup({ handleSignup }) {
                 />
                 <br />
                 <input
-                    className='signupInput'
+                    className='SignupInput'
                     type='password'
                     required={true}
                     value={password}
@@ -67,6 +67,7 @@ export default function Signup({ handleSignup }) {
                 {error && <p className='ErrorMessage'>{error}</p>}
                 <button className='SignupButton' type='submit'>Sign Up</button>
             </form>
+            <span className='SignupLoginText'>Already have an account? <button className='SignupLoginButton' onClick={() => navigate('/login')}>Login</button></span>
         </div>
     );
 }
